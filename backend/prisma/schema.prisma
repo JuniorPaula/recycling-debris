@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model Dumpster {
+  id        Int      @id @default(autoincrement())
+  serial    String   @unique
+  color     String
+
+  rentals   Rental[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([serial])
+}
+
+model Rental {
+  id         Int      @id @default(autoincrement())
+
+  dumpsterId Int
+  dumpster   Dumpster @relation(fields: [dumpsterId], references: [id], onDelete: Cascade)
+
+  cep        String
+  street     String
+  district   String
+  city       String
+
+  startDate  DateTime @default(now())
+  endDate    DateTime?
+
+  createdAt  DateTime @default(now())
+
+  @@index([dumpsterId])
+  @@index([endDate])
+}
