@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '@/lib/api';
-import type { Dumpster, Rental } from '../../../../lib/types';
+import type { Dumpster, Rental } from '../../../../../lib/types';
 
 function fmtDate(isoOrDate: string | Date | null | undefined) {
   if (!isoOrDate) return '-';

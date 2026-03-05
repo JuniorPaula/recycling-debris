@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { api } from '@/lib/api';
-import type { Dumpster } from '../../lib/types';
+import type { Dumpster } from '../../../lib/types';
 import { toast } from 'react-toastify';
 
 export default function DumpstersPage() {

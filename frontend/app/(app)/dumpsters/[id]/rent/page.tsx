@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '@/lib/api';
-import type { Dumpster, Rental } from '../../../../lib/types';
+import type { Dumpster, Rental } from '../../../../../lib/types';
 
 type ViaCepResponse = {
   cep?: string;
@@ -266,10 +266,6 @@ export default function RentDumpsterPage() {
             </div>
           </form>
         </div>
-
-        <footer className="text-xs text-neutral-400">
-          Endpoints: <code>GET /api/dumpsters/{id}</code> • <code>POST /api/rentals</code> • ViaCEP
-        </footer>
       </div>
     </main>
   );

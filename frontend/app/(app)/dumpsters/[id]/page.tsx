@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '@/lib/api';
-import type { Dumpster } from '../../../lib/types';
+import type { Dumpster } from '../../../../lib/types';
 
 export default function EditDumpsterPage() {
   const router = useRouter();

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { api } from '@/lib/api';
-import type { Dumpster } from '../../../lib/types';
+import type { Dumpster } from '../../../../lib/types';
 import { toast } from 'react-toastify';
 
 export default function NewDumpsterPage() {
@@ -104,10 +104,6 @@ export default function NewDumpsterPage() {
             </div>
           </form>
         </div>
-
-        <footer className="text-xs text-neutral-400">
-          Endpoint: <code>POST /api/dumpsters</code>
-        </footer>
       </div>
     </main>
   );
