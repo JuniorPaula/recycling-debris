@@ -143,7 +143,7 @@ export default function EditDumpsterPage() {
                 href={`/dumpsters/${dumpster.id}/rent`}
                 className={`rounded-full px-6 py-2.5 text-sm font-semibold text-white shadow-sm ${
                   dumpster.isRented
-                    ? 'bg-red-600 cursor-not-allowed pointer-events-none'
+                    ? 'bg-amber-700 cursor-not-allowed pointer-events-none'
                     : 'bg-cyan-600 hover:opacity-95'
                 }`}
                 title={dumpster.isRented ? 'Caçamba já está alugada' : 'Alugar caçamba'}
