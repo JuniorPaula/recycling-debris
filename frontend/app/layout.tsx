@@ -13,9 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body
-        className={`antialiased`}
+        className="min-h-screen bg-zinc-100 text-zinc-900"
       >
         <ToastContainer />
         {children}

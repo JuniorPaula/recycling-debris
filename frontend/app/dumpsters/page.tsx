@@ -86,7 +86,7 @@ export default function DumpstersPage() {
 
         <div className="rounded-md border overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-gray-100">
+            <thead className="bg-gray-50">
               <tr>
                 <th className="text-left px-4 py-3">Serial</th>
                 <th className="text-left px-4 py-3">Cor</th>
@@ -110,18 +110,48 @@ export default function DumpstersPage() {
               ) : (
                 data.map((d) => (
                   <tr key={d.id} className="border-t">
-                    <td className="px-4 py-3">{d.serial}</td>
+                    <td className="px-4 py-3 font-mono">{d.serial}</td>
                     <td className="px-4 py-3">{d.color}</td>
+
                     <td className="px-4 py-3">
-                      {d.isRented ? 'Alugada' : 'Disponível'}
+                      {d.isRented ? (
+                        <span className="inline-flex items-center rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-xs font-semibold">
+                          Alugada
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center rounded-full bg-emerald-100 text-emerald-800 px-3 py-1 text-xs font-semibold">
+                          Disponível
+                        </span>
+                      )}
                     </td>
+
                     <td className="px-4 py-3 text-right">
-                      <Link
-                        href={`/dumpsters/${d.id}`}
-                        className="underline"
-                      >
-                        Editar
-                      </Link>
+                      <div className="flex justify-end gap-2">
+                        <Link
+                          href={`/dumpsters/${d.id}`}
+                          className="rounded-full border px-3 py-1.5 text-xs font-semibold hover:bg-neutral-50"
+                        >
+                          Editar
+                        </Link>
+
+                        <Link
+                          href={`/dumpsters/${d.id}/rentals`}
+                          className="rounded-full border px-3 py-1.5 text-xs font-semibold hover:bg-neutral-50"
+                        >
+                          Histórico
+                        </Link>
+
+                        <Link
+                          href={`/dumpsters/${d.id}/rent`}
+                          className={`rounded-full px-3 py-1.5 text-xs font-semibold text-white ${d.isRented
+                            ? 'bg-neutral-400 cursor-not-allowed pointer-events-none'
+                            : 'bg-emerald-600 hover:bg-emerald-700'
+                            }`}
+                          title={d.isRented ? 'Caçamba já está alugada' : 'Alugar caçamba'}
+                        >
+                          Alugar
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))
