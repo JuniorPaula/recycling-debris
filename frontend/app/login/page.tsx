@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 function TrashLogo() {
   return (
@@ -24,7 +25,6 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const canSubmit = useMemo(() => {
     return email.trim().length > 0 && pass.trim().length > 0 && !loading;
@@ -32,16 +32,16 @@ export default function LoginPage() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError(null);
 
     setLoading(true);
     try {
       localStorage.setItem('auth_token', 'dev-token');
       localStorage.setItem('auth_email', email.trim());
 
+      toast.success('Login Realizado com sucesso!');
       router.push('/dumpsters');
     } catch {
-      setError('Não foi possível entrar. Tente novamente.');
+      toast.error('Não foi possível entrar. Tente novamente.');
     } finally {
       setLoading(false);
     }
@@ -89,17 +89,11 @@ export default function LoginPage() {
             />
           </div>
 
-          {error && (
-            <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
-              {error}
-            </div>
-          )}
-
-          <div className="pt-2 flex justify-center">
+          <div className="pt-2 flex justify-end">
             <button
               type="submit"
               disabled={!canSubmit}
-              className="group inline-flex items-center justify-center gap-3 rounded-full bg-brand-green px-10 py-3 text-white font-semibold shadow-soft disabled:opacity-60 disabled:cursor-not-allowed hover:bg-brand-greenDark transition"
+              className="group inline-flex items-center justify-center gap-3 rounded-full bg-green-700 px-10 py-2 text-white font-semibold disabled:cursor-not-allowed hover:bg-green-600 transition"
             >
               {loading ? 'Entrando...' : 'Entrar'}
               <span className="text-white/90 text-lg tracking-wide group-hover:translate-x-0.5 transition">

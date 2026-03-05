@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { api } from '@/lib/api';
 import type { Dumpster } from '../../lib/types';
+import { toast } from 'react-toastify';
 
 export default function DumpstersPage() {
   const [serial, setSerial] = useState('');
@@ -11,7 +12,6 @@ export default function DumpstersPage() {
 
   const [data, setData] = useState<Dumpster[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   const query = useMemo(() => {
     const qs = new URLSearchParams();
@@ -23,12 +23,11 @@ export default function DumpstersPage() {
 
   async function load() {
     setLoading(true);
-    setError(null);
     try {
       const res = await api<Dumpster[]>(`/dumpsters${query}`);
       setData(res);
     } catch (e: any) {
-      setError(e?.message ?? 'Erro ao buscar caçambas');
+      toast.error(e?.message ?? 'Erro ao buscar caçambas');
     } finally {
       setLoading(false);
     }
@@ -84,12 +83,6 @@ export default function DumpstersPage() {
             {loading ? 'Carregando...' : 'Atualizar'}
           </button>
         </div>
-
-        {error && (
-          <div className="rounded-md border border-red-300 bg-red-50 px-4 py-3 text-red-700">
-            {error}
-          </div>
-        )}
 
         <div className="rounded-md border overflow-hidden">
           <table className="w-full text-sm">
